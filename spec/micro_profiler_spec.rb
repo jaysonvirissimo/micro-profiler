@@ -3,7 +3,9 @@ require 'spec_helper'
 RSpec.describe MicroProfiler do
   subject do
     MicroProfiler.measure do
-      100.times { 'ABC' * 100 }
+      thing = []
+      1000.times { thing.push('ABC') }
+      thing
     end
   end
 
@@ -21,5 +23,10 @@ RSpec.describe MicroProfiler do
     it { expect { subject }.to output(/#{expected_message}/).to_stdout }
   end
 
-  xdescribe 'returns the yielded result' 
+  describe 'returns the yielded result' do
+    let(:result) { subject }
+
+    it { expect(result).to be_an(Array) }
+    it { expect(result.length).to eq(1000) }
+  end
 end

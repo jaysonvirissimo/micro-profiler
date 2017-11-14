@@ -11,12 +11,11 @@ class MicroProfiler
 
   def measure(block)
     starting_memory_usage
-
-    block.call
-
+    result = block.call
     ending_memory_usage
-
     print_results
+
+    result
   end
 
   private
