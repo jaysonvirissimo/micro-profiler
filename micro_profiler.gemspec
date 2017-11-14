@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jayson Virissimo"]
   spec.email         = ["jayson.virissimo@asu.edu"]
 
-  spec.summary       = %q{An absolutely tiny Ruby profiler}
-  spec.description   = %q{The smallest possible useful code profiler for Ruby}
+  spec.summary       = %q{A minimalistic performance profiler}
+  spec.description   = %q{Measure time, memory usage, and GC runs of Ruby code}
   spec.homepage      = "https://github.com/jaysonvirissimo/micro-profiler"
   spec.license       = "MIT"
 
