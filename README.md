@@ -1,6 +1,7 @@
 # MicroProfiler
 
 Did you ever wish you had a Ruby performance profiler with almost no features?
+
 No? Well, if you did, then this is the gem for you!
 
 ## Installation
@@ -20,7 +21,7 @@ Or install it yourself as:
     $ gem install micro_profiler
 
 ## Usage
-Ruby Code:
+Just wrap the code you want to profile in a block like this:
 ```ruby
 def expensive_method
   array = []
@@ -36,7 +37,7 @@ MicroProfiler.measure do
 end
 ```
 
-Console:
+And the measurements will print to STDOUT like this:
 ```
 --- Performance Measurements ---
 Garbage Collection: Enabled
