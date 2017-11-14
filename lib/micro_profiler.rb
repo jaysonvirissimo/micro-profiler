@@ -12,14 +12,10 @@ class MicroProfiler
     @garbage_collection = garbage_collection
   end
 
-  def measure(block: Proc.new)
-    starting_memory_usage
-    starting_garbage_collection_count
-    result = nil
-    self.time = Benchmark.realtime do
-      result = block.call
-    end
-    ending_memory_usage
+  def measure(result: nil, block: Proc.new)
+    before
+    self.time = Benchmark.realtime { result = block.call }
+    after
 
     print_measurements
     result
@@ -29,6 +25,16 @@ class MicroProfiler
 
   attr_accessor :time
   attr_reader :garbage_collection
+
+  def after
+    ending_memory_usage
+    ending_garbage_collection_count
+  end
+
+  def before
+    starting_garbage_collection_count
+    starting_memory_usage
+  end
 
   def current_garbage_collection_count
     GC.stat[:count].to_i
