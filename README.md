@@ -1,8 +1,7 @@
 # MicroProfiler
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/micro_profiler`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Did you ever wish you had a Ruby performance profiler with almost no features?
+No? Well, if you did, then this is the gem for you!
 
 ## Installation
 
@@ -21,8 +20,32 @@ Or install it yourself as:
     $ gem install micro_profiler
 
 ## Usage
+Ruby Code:
+```ruby
+def expensive_method
+  array = []
+  10000.times do
+    string = 'ABC' * 1000
+    array.unshift(string)
+  end
+  array
+end
 
-TODO: Write usage instructions here
+MicroProfiler.measure do
+  expensive_method + expensive_method + expensive_method
+end
+```
+
+Console:
+```
+--- Performance Measurements ---
+Garbage Collection: Enabled
+Memory Usage: 89 MB
+Number of Garbage Collection Runs: 4
+Time Elapsed: 0.06 seconds
+```
+
+You can disable garbage collection by passing `garbage_collection: false` to `MicroProfiler.measure`.
 
 ## Development
 
@@ -32,7 +55,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/micro_profiler.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jaysonvirissimo/micro-profiler.
 
 ## License
 
