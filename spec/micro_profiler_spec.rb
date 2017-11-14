@@ -23,8 +23,20 @@ RSpec.describe MicroProfiler do
     it { expect { subject }.to output(/#{expected_message}/).to_stdout }
   end
 
+  describe 'prints garbage collection configuration' do
+    let(:expected_message) { 'Garbage Collection: Enabled' }
+
+    it { expect { subject }.to output(/#{expected_message}/).to_stdout }
+  end
+
   describe 'prints the number of garbage collection runs' do
     let(:expected_message) { 'Number of Garbage Collection Runs: ' }
+
+    it { expect { subject }.to output(/#{expected_message}/).to_stdout }
+  end
+
+  describe 'prints the elapsed time' do
+    let(:expected_message) { 'Time Elapsed: ' }
 
     it { expect { subject }.to output(/#{expected_message}/).to_stdout }
   end
