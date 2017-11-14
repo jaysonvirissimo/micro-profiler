@@ -2,14 +2,14 @@ require 'micro_profiler/version'
 
 class MicroProfiler
   def self.measure(garbage_collection: true, block: Proc.new)
-    new(garbage_collection: garbage_collection).measure(block)
+    new(garbage_collection: garbage_collection).measure(block: block)
   end
 
   def initialize(garbage_collection: true)
     @garbage_collection = garbage_collection
   end
 
-  def measure(block)
+  def measure(block: Proc.new)
     starting_memory_usage
     result = block.call
     ending_memory_usage
