@@ -13,7 +13,7 @@ class MicroProfiler
     starting_memory_usage
     result = block.call
     ending_memory_usage
-    print_results
+    print_measurements
 
     result
   end
@@ -42,7 +42,7 @@ class MicroProfiler
     end
   end
 
-  def print_results
+  def print_measurements
     puts "Memory Usage: #{formatted_memory_usage}"
   end
 
