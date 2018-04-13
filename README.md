@@ -24,22 +24,21 @@ Or install it yourself as:
 Just wrap the code you want to profile in a block like this:
 ```ruby
 def expensive_method
-  array = []
-  10000.times do
-    string = 'ABC' * 1000
-    array.unshift(string)
+  MicroProfiler.measure do
+    array = []
+    10000.times do
+      string = 'ABC' * 1000
+      array.unshift(string)
+    end
+    array
   end
-  array
-end
-
-MicroProfiler.measure do
-  expensive_method + expensive_method + expensive_method
 end
 ```
 
 And the measurements will print to STDOUT like this:
 ```
 --- Performance Measurements ---
+Calling Method: #expensive_method:26
 Garbage Collection: Disabled
 Memory Usage: 89 MB
 Number of Garbage Collection Runs: 4

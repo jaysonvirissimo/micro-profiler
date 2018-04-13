@@ -1,13 +1,16 @@
 require 'spec_helper'
 
 RSpec.describe MicroProfiler do
-  subject do
-    MicroProfiler.measure do
-      thing = []
-      1000.times { thing.push('ABC') }
-      thing
+  class CallingClass
+    def expensive_computation
+      MicroProfiler.measure do
+        thing = []
+        1000.times { thing.push('ABC') }
+        thing
+      end
     end
   end
+  subject { CallingClass.new.expensive_computation }
 
   it 'has a version number' do
     expect(MicroProfiler::VERSION).not_to be nil
@@ -19,6 +22,14 @@ RSpec.describe MicroProfiler do
 
   describe 'prints memory usage in megabytes' do
     let(:expected_message) { 'Memory Usage: ' }
+
+    it { expect { subject }.to output(/#{expected_message}/).to_stdout }
+  end
+
+  describe 'prints the class and method from within it was called' do
+    let(:expected_message) do
+      'Calling Method: #expensive_computation:6'
+    end
 
     it { expect { subject }.to output(/#{expected_message}/).to_stdout }
   end

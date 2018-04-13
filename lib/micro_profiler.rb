@@ -13,6 +13,7 @@ class MicroProfiler
   end
 
   def measure(result: nil, block: Proc.new)
+    calling_method
     before
     self.time = Benchmark.realtime { result = block.call }
     after
@@ -34,6 +35,10 @@ class MicroProfiler
   def before
     starting_garbage_collection_count
     starting_memory_usage
+  end
+
+  def calling_method
+    @calling_method ||= "##{caller_locations[2].label}:#{caller_locations[2].lineno}"
   end
 
   def current_garbage_collection_count
@@ -70,6 +75,7 @@ class MicroProfiler
 
   def print_measurements
     puts '--- Performance Measurements ---'
+    puts "Calling Method: #{calling_method}"
     puts "Garbage Collection: #{garbage_collection ? 'Enabled' : 'Disabled'}"
     puts "Memory Usage: #{formatted_memory_usage}"
     puts "Number of Garbage Collection Runs: #{garbage_collection_runs}"
