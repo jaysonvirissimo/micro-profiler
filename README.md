@@ -40,13 +40,13 @@ end
 And the measurements will print to STDOUT like this:
 ```
 --- Performance Measurements ---
-Garbage Collection: Enabled
+Garbage Collection: Disabled
 Memory Usage: 89 MB
 Number of Garbage Collection Runs: 4
 Time Elapsed: 0.06 seconds
 ```
 
-You can disable garbage collection by passing `garbage_collection: false` to `MicroProfiler.measure`.
+By default, garbage collection is disabled. Re-enable it by passing `garbage_collection: true` to `MicroProfiler.measure`.
 
 ## Development
 

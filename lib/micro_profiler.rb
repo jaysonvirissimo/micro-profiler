@@ -4,11 +4,11 @@ require 'benchmark'
 class MicroProfiler
   TIME_PRECISION = 2
 
-  def self.measure(garbage_collection: true, block: Proc.new)
+  def self.measure(garbage_collection: false, block: Proc.new)
     new(garbage_collection: garbage_collection).measure(block: block)
   end
 
-  def initialize(garbage_collection: true)
+  def initialize(garbage_collection: false)
     @garbage_collection = garbage_collection
   end
 

@@ -13,8 +13,8 @@ RSpec.describe MicroProfiler do
     expect(MicroProfiler::VERSION).not_to be nil
   end
 
-  it 'defaults to using garbage collection' do
-    expect(MicroProfiler.new.send(:garbage_collection)).to be(true)
+  it 'defaults to not using garbage collection' do
+    expect(MicroProfiler.new.send(:garbage_collection)).to be(false)
   end
 
   describe 'prints memory usage in megabytes' do
@@ -24,7 +24,7 @@ RSpec.describe MicroProfiler do
   end
 
   describe 'prints garbage collection configuration' do
-    let(:expected_message) { 'Garbage Collection: Enabled' }
+    let(:expected_message) { 'Garbage Collection: Disabled' }
 
     it { expect { subject }.to output(/#{expected_message}/).to_stdout }
   end
